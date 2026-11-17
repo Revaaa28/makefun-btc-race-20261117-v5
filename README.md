@@ -8,8 +8,11 @@ one position, no network, no wall clock, fully deterministic.
 
 This is the **v5 design** first built for the 2026-11-13 race
 (capitulation + divergence retest dip-buyer, plus the day-low retest
-zone), carried over unchanged — same parameters, same native exits —
-and re-validated on this edition's dev window before submitting.
+zone) — same zones, same parameters, same native exits — freshly
+reimplemented for this edition and re-validated on this edition's dev
+window before submitting. The reimplementation's behaviour was
+verified order-for-order identical to the original bot's (every fill,
+on every window tested) before it was trusted.
 
 ## Strategy
 
@@ -47,7 +50,10 @@ pool impact, end-of-window flatten):
 
 - **Dev window: net PnL +$13.48** — 1 round trip (retest zone,
   bars 578 → 959), fees $0.81, max drawdown 0.62%. Two stdio
-  end-to-end runs byte-identical.
+  end-to-end runs byte-identical. A fill-by-fill comparison against
+  the original 2026-11-13 bot on this window and on all eight days
+  below matched exactly (same orders, same fills, same PnL to the
+  micro-USDC).
 - The same bot across 8 real Binance BTCUSDT 1-minute days
   (2026-11-09 → 2026-11-16, constant pool depth = the dev window's
   median) totals **+$0.12** — near-flat, worst day −$14.72, worst
